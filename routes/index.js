@@ -3,6 +3,8 @@ const controllers = require("../controllers");
 
 module.exports.registerRoutes = (app) => {
     app.use("/info", controllers.info);
+    app.use("/request", controllers.request);
+    app.use("/offer", controllers.offer);
 };
 
 module.exports.registerErrorHandlers = (app) => {

@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const getInfoController = async (_req, res) => {
+const getInfoController = (_req, res) => {
   res.status(200).send({
     name: "CovidIndBot",
     description:

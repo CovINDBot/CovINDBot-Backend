@@ -7,7 +7,7 @@ module.exports = (sequelize) => {
       amenity_name: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
+        primaryKey: true,
       },
     },
     { sequelize }
