@@ -1,0 +1,37 @@
+{
+  "name": "covindbot-backend",
+  "version": "1.0.0",
+  "description": "Backend for CovINDBot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CovINDBot/CovINDBot-Backend.git"
+  },
+  "keywords": [
+    "covid",
+    "twitter",
+    "bot"
+  ],
+  "author": "Siddharth Singha Roy",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/CovINDBot/CovINDBot-Backend/issues"
+  },
+  "homepage": "https://github.com/CovINDBot/CovINDBot-Backend#readme",
+  "dependencies": {
+    "compression": "^1.7.4",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "pg": "^8.6.0",
+    "sequelize": "^6.6.2",
+    "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
