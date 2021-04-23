@@ -11,6 +11,43 @@ const getRequestController = async (_req, res) => {
   });
 };
 
+const postRequestController = async (req, res) => {
+  const request = {
+    message: req.body.message,
+    contact: req.body.contact,
+    location: req.body.location,
+    amenities: req.body.amenities,
+    userID: req.user.id,
+  };
+  await sequelize.models.Request.createRequest(request);
+  res.send({ create: true });
+};
+
+const putRequestController = async (req, res) => {
+  const request = {
+    message: req.body.message,
+    contact: req.body.contact,
+    location: req.body.location,
+    amenities: req.body.amenities,
+    requestID: req.body.requestID,
+    userID: req.user.id,
+  };
+  await sequelize.models.Request.editRequest(request);
+  res.send({ create: true });
+};
+
+const deleteRequestController = async (req, res) => {
+  const request = {
+    requestID: req.body.requestID,
+    userID: req.user.id,
+  };
+  await sequelize.models.Request.deleteRequest(request);
+  res.send({ create: true });
+};
+
 router.route("/").get(getRequestController);
+router.route("/protect/").post(postRequestController);
+router.route("/protect/").put(putRequestController);
+router.route("/protect/").delete(deleteRequestController);
 
 module.exports = router;

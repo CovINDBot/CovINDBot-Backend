@@ -29,4 +29,6 @@ async function initServer() {
   );
 }
 
+sequelize.models.Offer.deleteOffer({ offerID: 1 });
+
 initServer();

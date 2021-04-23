@@ -19,7 +19,7 @@ module.exports = (sequelize) => {
       },
       location: {
         type: DataTypes.STRING,
-        defaultValueL: "",
+        defaultValue: "",
       },
     },
     { sequelize }
@@ -90,13 +90,23 @@ module.exports = (sequelize) => {
         id: offerID,
       },
     });
-    if(!instance) return;
+    if (!instance) return;
     instance.message = message;
     instance.contact = contact;
     instance.location = location;
     const newinstance = await instance.save();
     await newinstance.setAmenities(amenities);
     return newinstance;
+  };
+
+  Offer.deleteOffer = async function (offer) {
+    const { offerID } = offer;
+    if (!offerID) return;
+    await Offer.destroy({
+      where: {
+        id: offerID,
+      },
+    });
   };
 
   return Offer;

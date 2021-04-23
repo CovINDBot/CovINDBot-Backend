@@ -84,20 +84,33 @@ module.exports = (sequelize) => {
       contact = "",
       location = "India",
       amenities = [],
+      userID,
     } = request;
     if (!requestID) return;
     const instance = await Request.findOne({
       where: {
         id: requestID,
+        userID: userID,
       },
     });
-    if(!instance) return;
+    if (!instance) return;
     instance.message = message;
     instance.contact = contact;
     instance.location = location;
     const newinstance = await instance.save();
     await newinstance.setAmenities(amenities);
     return newinstance;
+  };
+
+  Request.deleteRequest = async function (request) {
+    const { requestID, userID } = request;
+    if (!requestID) return;
+    await Request.destroy({
+      where: {
+        id: requestID,
+        userID: userID,
+      },
+    });
   };
 
   return Request;
