@@ -13,5 +13,9 @@ module.exports = (sequelize) => {
     { sequelize }
   );
 
+  Amenity.getOffers = async function () {
+    return await this.findAll();
+  };
+
   return Amenity;
 };

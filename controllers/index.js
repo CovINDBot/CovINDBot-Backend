@@ -1,8 +1,8 @@
-const info = require("./info");
 const request = require("./request");
 const offer = require("./offer");
+const amenity = require("./amenities");
 module.exports = {
-  info,
   request,
   offer,
+  amenity,
 };

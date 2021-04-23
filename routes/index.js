@@ -2,9 +2,9 @@ const { logger } = require("../logger");
 const controllers = require("../controllers");
 
 module.exports.registerRoutes = (app) => {
-    app.use("/info", controllers.info);
-    app.use("/request", controllers.request);
-    app.use("/offer", controllers.offer);
+  app.use("/request", controllers.request);
+  app.use("/offer", controllers.offer);
+  app.use("/amenity", controllers.amenity);
 };
 
 module.exports.registerErrorHandlers = (app) => {
