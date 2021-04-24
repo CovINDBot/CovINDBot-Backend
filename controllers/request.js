@@ -4,8 +4,14 @@ const sequelize = require("../models");
 router.use(express.json());
 router.use(express.urlencoded({ extended: false }));
 
-const getRequestController = async (_req, res) => {
-  const data = await sequelize.models.Request.getRequests();
+const getRequestController = async (req, res) => {
+  const filters = {
+    message: req.body.message,
+    contact: req.body.contact,
+    location: req.body.location,
+    amenities: req.body.amenities,
+  };
+  const data = await sequelize.models.Request.getRequests(filters);
   res.status(200).send({
     data: data,
   });

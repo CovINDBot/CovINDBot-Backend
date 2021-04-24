@@ -44,9 +44,6 @@ module.exports = (sequelize) => {
       },
       include: [
         {
-          model: sequelize.models.User,
-        },
-        {
           model: sequelize.models.Amenity,
           where: {
             amenity_name: {

@@ -32,7 +32,6 @@ module.exports = (sequelize) => {
       startDate = new Date(new Date().setDate(new Date().getDate() - 14)),
       endDate = new Date(),
     } = filters;
-
     return await this.findAll({
       where: {
         location: location,
@@ -42,9 +41,6 @@ module.exports = (sequelize) => {
         },
       },
       include: [
-        {
-          model: sequelize.models.User,
-        },
         {
           model: sequelize.models.Amenity,
           where: {
