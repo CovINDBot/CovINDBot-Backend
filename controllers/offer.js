@@ -17,8 +17,11 @@ const postOfferController = async (req, res) => {
     contact: req.body.contact,
     location: req.body.location,
     amenities: req.body.amenities,
-    userID: req.user.id,
+    userID: 1,
   };
+  await sequelize.models.Location.createLocation({
+    name: req.body.location,
+  });
   await sequelize.models.Offer.createOffer(offer);
   res.send({ create: true });
 };

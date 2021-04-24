@@ -1,5 +1,6 @@
 const express = require("express");
 const compression = require("compression");
+const cors = require('cors')
 const routes = require("./routes");
 const { sanitiseInput } = require("./utils");
 
@@ -8,6 +9,7 @@ const app = express();
 
 // Will attempt to compress responses.
 app.use(compression());
+app.use(cors());
 
 // Parse incoming requests data.
 app.use(express.json());

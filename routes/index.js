@@ -5,6 +5,7 @@ module.exports.registerRoutes = (app) => {
   app.use("/request", controllers.request);
   app.use("/offer", controllers.offer);
   app.use("/amenity", controllers.amenity);
+  app.use("/location", controllers.location);
 };
 
 module.exports.registerErrorHandlers = (app) => {

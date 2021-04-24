@@ -18,6 +18,7 @@ const modelDefiners = [
   require("./request.model"),
   require("./offer_amenity.model"),
   require("./request_amenity.model"),
+  require("./location.model")
 ];
 
 // We define all models according to their files.

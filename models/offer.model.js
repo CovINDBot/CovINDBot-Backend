@@ -29,7 +29,7 @@ module.exports = (sequelize) => {
     const {
       location = "India",
       amenities = [],
-      startDate = new Date() - 30,
+      startDate = new Date(new Date().setDate(new Date().getDate() - 14)),
       endDate = new Date(),
     } = filters;
 
