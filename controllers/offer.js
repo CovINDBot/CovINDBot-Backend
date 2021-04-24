@@ -6,10 +6,10 @@ router.use(express.urlencoded({ extended: false }));
 
 const getOfferController = async (req, res) => {
   const filters = {
-    message: req.body.message,
-    contact: req.body.contact,
-    location: req.body.location,
-    amenities: req.body.amenities,
+    startDate: new Date(req.query.startDate),
+    endDate: new Date(req.query.endDate),
+    location: req.query.location,
+    amenities: req.query.amenities,
   };
   const data = await sequelize.models.Offer.getOffers(filters);
   res.status(200).send({

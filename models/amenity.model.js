@@ -10,7 +10,7 @@ module.exports = (sequelize) => {
         primaryKey: true,
       },
     },
-    { sequelize }
+    { timestamps: false, sequelize }
   );
 
   Amenity.getOffers = async function () {

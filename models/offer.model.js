@@ -1,9 +1,15 @@
 const { DataTypes, Op } = require("sequelize");
+const { v4: uuidv4 } = require("uuid");
 
 module.exports = (sequelize) => {
   const Offer = sequelize.define(
     "Offer",
     {
+      id: {
+        type: DataTypes.UUID,
+        allowNull: false,
+        primaryKey: true,
+      },
       date_of_offer: {
         type: DataTypes.DATEONLY,
         allowNull: false,
@@ -34,7 +40,7 @@ module.exports = (sequelize) => {
     } = filters;
     return await this.findAll({
       where: {
-        location: location,
+        location: location.toLowerCase(),
         date_of_offer: {
           [Op.lte]: endDate,
           [Op.gte]: startDate,
@@ -48,6 +54,7 @@ module.exports = (sequelize) => {
               [Op.in]: amenities,
             },
           },
+          attributes: ["amenity_name"],
         },
       ],
     });
@@ -65,7 +72,8 @@ module.exports = (sequelize) => {
     const instance = await this.create({
       message: message,
       contact: contact,
-      location: location,
+      location: location.toLowerCase(),
+      id: uuidv4(),
     });
     await instance.setUser(userID);
     await instance.addAmenity(amenities);
@@ -89,7 +97,7 @@ module.exports = (sequelize) => {
     if (!instance) return;
     instance.message = message;
     instance.contact = contact;
-    instance.location = location;
+    instance.location = location.toLowerCase();
     const newinstance = await instance.save();
     await newinstance.setAmenities(amenities);
     return newinstance;

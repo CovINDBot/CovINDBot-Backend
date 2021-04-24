@@ -1,16 +1,25 @@
 const { DataTypes } = require("sequelize");
+const { v4: uuidv4 } = require("uuid");
 
 module.exports = (sequelize) => {
   const Location = sequelize.define(
     "Location",
     {
+      id: {
+        type: DataTypes.UUID,
+        allowNull: false,
+        primaryKey: true,
+      },
       name: {
         type: DataTypes.STRING,
         allowNull: false,
         defaultValue: new Date(),
       },
     },
-    { sequelize }
+    {
+      timestamps: false,
+      sequelize,
+    }
   );
 
   Location.getLocation = async function () {
@@ -21,9 +30,10 @@ module.exports = (sequelize) => {
     const { name } = location;
     if (!name) return;
     const instance = await this.findOrCreate({
-      where: { name: name },
+      where: { name: name.toLowerCase() },
       defaults: {
-        name: name,
+        name: name.toLowerCase(),
+        id: uuidv4(),
       },
     });
     return instance;
