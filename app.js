@@ -20,6 +20,7 @@ app.use("*", (req, _res, next) => {
   next();
 });
 
+routes.registerAuthRoutes(app);
 routes.registerRoutes(app);
 routes.registerErrorHandlers(app);
 
