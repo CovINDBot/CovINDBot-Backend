@@ -1,6 +1,10 @@
 const { app } = require("./app");
 const { logger } = require("./logger");
 const sequelize = require("./models");
+const fs = require('fs');
+const http = require('http');
+const https = require('https');
+
 
 // Use .env in development mode, .env.production in production mode
 const dotenvfile =
@@ -8,6 +12,11 @@ const dotenvfile =
 require("dotenv").config({ path: dotenvfile });
 // Read the port from the environment file
 const PORT = process.env.PORT || 8000;
+
+const options = {
+  key: fs.readFileSync("key.pem"),
+  cert: fs.readFileSync("cert.pem"),
+};
 
 async function assertDatabaseConnectionOk() {
   try {
@@ -20,13 +29,27 @@ async function assertDatabaseConnectionOk() {
   }
 }
 
+function startHttpServer() {
+  var httpServer = http.createServer(app);
+  httpServer.listen(PORT);
+  logger.info(`CovINDBot Server listening on Port ${PORT}`);
+}
+
+function startHttpsServer() {
+  var httpsServer = https.createServer(options, app);
+  httpsServer.listen(PORT);
+  logger.info(`CovINDBot Server listening on Port ${PORT}`);
+}
+
 async function initServer() {
   await assertDatabaseConnectionOk();
   await sequelize.sync();
   require("./scripts")();
-  app.listen(PORT, () =>
-    logger.info(`CovINDBot Server listening on Port ${PORT}`)
-  );
+  if (process.env.NODE_ENV === "production") {
+    startHttpsServer();
+  } else {
+    startHttpServer();
+  }
 }
 
 initServer();
