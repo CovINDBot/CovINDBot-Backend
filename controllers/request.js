@@ -25,6 +25,9 @@ const postRequestController = async (req, res) => {
     amenities: req.body.amenities,
     userID: req.user.id,
   };
+  await sequelize.models.Location.createLocation({
+    name: req.body.location,
+  });
   await sequelize.models.Request.createRequest(request);
   res.send({ create: true });
 };
@@ -38,6 +41,9 @@ const putRequestController = async (req, res) => {
     requestID: req.body.requestID,
     userID: req.user.id,
   };
+  await sequelize.models.Location.createLocation({
+    name: req.body.location,
+  });
   await sequelize.models.Request.editRequest(request);
   res.send({ create: true });
 };

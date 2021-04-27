@@ -5,14 +5,14 @@ const google = require("../config/google.auth");
 const authMiddleware = async (req, res, next) => {
   try {
     if (req.body.authType === "Google") {
-      const instance = google(req.body.token);
+      const instance = await google(req.body.token);
       req.user = instance;
       next();
     } else {
-      res.status(404).send({ auth: false, error: "Token not provided" });
+      res.status(401).send({ auth: false, error: "Token not provided" });
     }
   } catch (err) {
-    res.status(404).send({ auth: false, error: err });
+    res.status(401).send({ auth: false, error: err });
   }
 };
 

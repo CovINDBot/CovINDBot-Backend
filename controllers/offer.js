@@ -23,7 +23,7 @@ const postOfferController = async (req, res) => {
     contact: req.body.contact,
     location: req.body.location,
     amenities: req.body.amenities,
-    userID: 1,
+    userID: req.user.id,
   };
   await sequelize.models.Location.createLocation({
     name: req.body.location,
@@ -41,6 +41,9 @@ const putOfferController = async (req, res) => {
     offerID: req.body.offerID,
     userID: req.user.id,
   };
+  await sequelize.models.Location.createLocation({
+    name: req.body.location,
+  });
   await sequelize.models.Offer.editOffer(offer);
   res.send({ create: true });
 };
