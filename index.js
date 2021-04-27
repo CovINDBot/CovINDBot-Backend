@@ -6,7 +6,6 @@ const sequelize = require("./models");
 const dotenvfile =
   process.env.NODE_ENV === "production" ? ".env.production" : ".env";
 require("dotenv").config({ path: dotenvfile });
-require("./scripts")();
 // Read the port from the environment file
 const PORT = process.env.PORT || 8000;
 
@@ -24,6 +23,7 @@ async function assertDatabaseConnectionOk() {
 async function initServer() {
   await assertDatabaseConnectionOk();
   await sequelize.sync();
+  require("./scripts")();
   app.listen(PORT, () =>
     logger.info(`CovINDBot Server listening on Port ${PORT}`)
   );
