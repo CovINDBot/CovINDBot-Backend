@@ -13,7 +13,7 @@ app.use(cors());
 
 // Parse incoming requests data.
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 
 app.use("*", (req, _res, next) => {
   req.body = sanitiseInput(req.body);
